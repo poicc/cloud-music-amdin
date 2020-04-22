@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soft1851.music.admin.mapper.VideoCommentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.soft1851.music.admin.entity.VideoComment">
+        <id column="id" property="id" />
+        <result column="video_id" property="videoId" />
+        <result column="comment_id" property="commentId" />
+        <result column="comment_contetn" property="commentContetn" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, video_id, comment_id, comment_contetn, create_time, update_time
+    </sql>
+
+</mapper>

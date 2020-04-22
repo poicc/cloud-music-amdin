@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soft1851.music.admin.mapper.SongMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.soft1851.music.admin.entity.Song">
+        <id column="song_id" property="songId" />
+        <result column="song_name" property="songName" />
+        <result column="sort_id" property="sortId" />
+        <result column="singer" property="singer" />
+        <result column="duration" property="duration" />
+        <result column="thumbnail" property="thumbnail" />
+        <result column="url" property="url" />
+        <result column="lyric" property="lyric" />
+        <result column="comment_count" property="commentCount" />
+        <result column="like_count" property="likeCount" />
+        <result column="play_count" property="playCount" />
+        <result column="delete_flag" property="deleteFlag" />
+        <result column="update_time" property="updateTime" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        song_id, song_name, sort_id, singer, duration, thumbnail, url, lyric, comment_count, like_count, play_count, delete_flag, update_time, create_time
+    </sql>
+
+</mapper>

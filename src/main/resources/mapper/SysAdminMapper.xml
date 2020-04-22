@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soft1851.music.admin.mapper.SysAdminMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.soft1851.music.admin.entity.SysAdmin">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="password" property="password" />
+        <result column="salt" property="salt" />
+        <result column="avatar" property="avatar" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="status" property="status" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+<!--    <sql id="Base_Column_List">-->
+<!--        id, name, password, salt, avatar, create_time, update_time, status-->
+<!--    </sql>-->
+
+    <select id="getAdminMenuByAdminId" parameterType="String" resultType="map">
+        SELECT t1.id, t1.name, t1.avatar, t1.create_time, t3.role_name, t3.role_id
+        FROM role_admin t2
+                 LEFT JOIN sys_admin t1 ON t1.id = t2.admin_id
+                 LEFT JOIN sys_role t3 ON t2.role_id=t3.role_id
+        WHERE t2.admin_id=#{adminId}
+    </select>
+
+</mapper>
