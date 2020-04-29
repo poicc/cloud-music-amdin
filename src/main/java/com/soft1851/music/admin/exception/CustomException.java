@@ -3,7 +3,11 @@ package com.soft1851.music.admin.exception;
 import com.soft1851.music.admin.common.ResultCode;
 
 /**
- * @author CRQ
+ * @ClassName CustomException
+ * @Description 用户自定义异常
+ * @Author crq
+ * @Date 2020/4/21
+ * @Version 1.0
  */
 public class CustomException extends RuntimeException {
     protected ResultCode resultCode;

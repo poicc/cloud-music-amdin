@@ -11,9 +11,9 @@ import com.baomidou.mybatisplus.generator.engine.FreemarkerTemplateEngine;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * @ClassName MybatisPlusGenerator
- * @Description TODO
- * @Author mq_xu
+ * @ClassName MySqlGenerator
+ * @Description 代码生成器
+ * @Author crq
  * @Date 2020/4/16
  * @Version 1.0
  */
@@ -26,7 +26,7 @@ public class MySqlGenerator {
         String projectPath = System.getProperty("user.dir");
         config.setActiveRecord(true)
                 //作者注释
-                .setAuthor("qj")
+                .setAuthor("crq")
                 //代码生成输出路径
                 .setOutputDir(projectPath + "/src/main/java")
                 //覆盖已有文件，默认false
@@ -77,9 +77,9 @@ public class MySqlGenerator {
         DataSourceConfig dataSourceConfig = new DataSourceConfig();
         dataSourceConfig.setDbType(DbType.MYSQL)
                 .setDriverName("com.mysql.jdbc.Driver")
-                .setUrl("jdbc:mysql://rm-m5ee476bu350735gjeo.mysql.rds.aliyuncs.com:3306/cloud_music?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai")
+                .setUrl("jdbc:mysql://rm-m5ee476bu350735gjeo.mysql.rds.aliyuncs.com:3306/db_crq?useUnide=true&characterEncoding=UTF-8&useSSL=false&autoReconnect=true")
                 .setUsername("root")
-                .setPassword("XuNiit_#");
+                .setPassword("root");
 
         AutoGenerator autoGenerator = new AutoGenerator();
         autoGenerator.setGlobalConfig(config)

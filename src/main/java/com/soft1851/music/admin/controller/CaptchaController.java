@@ -15,41 +15,41 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 /**
- * @author CRQ
+ * @ClassName CaptchaController
+ * @Description Captcha控制层
+ * @Author crq
+ * @Date 2020/4/21
+ * @Version 1.0
  */
 @RestController
 @Slf4j
 public class CaptchaController {
-
     @Resource
     private DefaultKaptcha defaultKaptcha;
-
     @Resource
     private RedisService redisService;
+
     @GetMapping("/captcha")
-    public void defaultCaptcha(String key){
-        log.info("**********************");
-        log.info(key);
-        log.info("**********************");
+    public void defaultCaptcha(String name) {
+        //取得HttpServletResponse对象
         ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         assert sra != null;
         HttpServletResponse response = sra.getResponse();
+        //生成验证码文本
         String text = defaultKaptcha.createText();
         log.info(text);
-//        sout只有在自己开发的机器上显示
-//        log可以在服务器上显示
-        //把验证码存放在Redis    有效时长10分钟
-        redisService.save(key,text, 10);
-//        生成验证码图片，将text写入，并通过response输出到客户端浏览器
+        //将验证码存入redis，配置的失效时间单位是分钟
+        redisService.set(name, text, 2L);
+        //生成验证码图片，并通过response输出到客户端浏览器
         BufferedImage image = defaultKaptcha.createImage(text);
+        //设置response的响应内容类型为图片格式
         assert response != null;
         response.setContentType("image/jpeg");
-        //设置失效时间            不失效
-        response.setDateHeader("Expires",10);
+        response.setDateHeader("Expires", 0);
         try {
+            //通过ImageIO将验证码图片通过response的字节输出流传回客户端
             ImageIO.write(image, "jpg", response.getOutputStream());
         } catch (IOException e) {
-            log.error("图片传输异常");
             e.printStackTrace();
         }
     }

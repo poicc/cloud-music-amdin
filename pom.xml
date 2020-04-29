@@ -122,6 +122,18 @@
           <version>1.2.66</version>
       </dependency>
 
+      <!--poi依赖，使用SXSSFWorkbook来处理大数据量Excel导出必须-->
+      <dependency>
+          <groupId>org.apache.poi</groupId>
+          <artifactId>poi</artifactId>
+          <version>4.1.0</version>
+      </dependency>
+      <dependency>
+          <groupId>org.apache.poi</groupId>
+          <artifactId>poi-ooxml</artifactId>
+          <version>4.1.0</version>
+      </dependency>
+
     </dependencies>
 
     <build>

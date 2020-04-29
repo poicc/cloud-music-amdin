@@ -7,8 +7,13 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import java.io.*;
 
 /**
- * @author CRQ
+ * @ClassName RequestWrapper
+ * @Description Request请求参数获取处理类
+ * @Author crq
+ * @Date 2020/4/21
+ * @Version 1.0
  */
+
 public class RequestWrapper extends HttpServletRequestWrapper {
     private final String body;
 
@@ -30,7 +35,7 @@ public class RequestWrapper extends HttpServletRequestWrapper {
                 stringBuilder.append("");
             }
         } catch (IOException ex) {
-
+            ex.printStackTrace();
         } finally {
             if (inputStream != null) {
                 try {
@@ -51,9 +56,9 @@ public class RequestWrapper extends HttpServletRequestWrapper {
     }
 
     @Override
-    public ServletInputStream getInputStream() throws IOException {
+    public ServletInputStream getInputStream() {
         final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(body.getBytes());
-        ServletInputStream servletInputStream = new ServletInputStream() {
+        return new ServletInputStream() {
             @Override
             public boolean isFinished() {
                 return false;
@@ -69,16 +74,15 @@ public class RequestWrapper extends HttpServletRequestWrapper {
             }
 
             @Override
-            public int read() throws IOException {
+            public int read() {
                 return byteArrayInputStream.read();
             }
         };
-        return servletInputStream;
 
     }
 
     @Override
-    public BufferedReader getReader() throws IOException {
+    public BufferedReader getReader() {
         return new BufferedReader(new InputStreamReader(this.getInputStream()));
     }
 

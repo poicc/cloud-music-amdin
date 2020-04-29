@@ -8,8 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
- * @author CRQ
+ * @ClassName ChannelFilter
+ * @Description 过滤器Filter，用来把request传递下去
+ * @Author crq
+ * @Date 2020/4/21
+ * @Version 1.0
  */
+
 @WebFilter(urlPatterns = "/*", filterName = "channelFilter")
 public class ChannelFilter implements Filter {
 

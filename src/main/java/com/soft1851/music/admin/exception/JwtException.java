@@ -1,9 +1,14 @@
 package com.soft1851.music.admin.exception;
 
+
 import com.soft1851.music.admin.common.ResultCode;
 
 /**
- * @author CRQ
+ * @ClassName JwtException
+ * @Description 自定义异常
+ * @Author crq
+ * @Date 2020/4/15
+ * @Version 1.0
  */
 public class JwtException extends RuntimeException {
 

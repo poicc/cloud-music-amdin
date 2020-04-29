@@ -1,4 +1,4 @@
-package com.soft1851.music.admin.handler;
+package com.soft1851.music.admin.handler;//package com.soft1851.music.admin.handler;
 
 import com.soft1851.music.admin.common.ResponseResult;
 import org.springframework.core.MethodParameter;
@@ -9,8 +9,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
 /**
- * @author CRQ
+ * @author mq_xu
+ * @description 全局统一响应处理
+ * @create crq
  */
+
 @ControllerAdvice
 public class GlobalResponseHandler implements ResponseBodyAdvice {
 

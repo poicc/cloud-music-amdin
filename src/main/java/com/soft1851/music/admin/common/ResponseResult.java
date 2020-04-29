@@ -5,12 +5,11 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @author mq_xu
- * @ClassName Result
- * @Description 返回给客户端的结果对象
- * @Date 2019/12/1
- * @Version 1.0
- **/
+ * @author crq
+ * @ClassName  ResponseResult
+ * @description 返回的JSON数据结构标准
+ * @create 2020/2/5
+ */
 @Data
 public class ResponseResult implements Serializable {
     private static final long serialVersionUID = -3948389268046368059L;

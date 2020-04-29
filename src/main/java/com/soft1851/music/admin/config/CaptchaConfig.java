@@ -8,24 +8,39 @@ import org.springframework.context.annotation.Configuration;
 import java.util.Properties;
 
 /**
- * @author CRQ
+ * @ClassName CaptchaConfig
+ * @Description Captcha配置类
+ * @Author crq
+ * @Date 2020/4/21
+ * @Version 1.0
  */
 @Configuration
 public class CaptchaConfig {
     @Bean
-    public DefaultKaptcha defaultKaptcha(){
+    public DefaultKaptcha defaultKaptcha() {
         DefaultKaptcha defaultKaptcha = new DefaultKaptcha();
         Properties properties = new Properties();
-        properties.setProperty("kaptcha.textproducer.cjar.length","4");
-        properties.setProperty("kaptcha.border","yes");
-        properties.setProperty("kaptcha.border.color.length","150,180,90");
-        properties.setProperty("kaptcha.textproducer.font.color","red");
-        properties.setProperty("kaptcha.textproducer.font.size","30");
-        properties.setProperty("kaptcha.textproducer.font.names","微软雅黑，楷体，宋体");
-        properties.setProperty("kaptcha.image.width","120");
-        properties.setProperty("kaptcha.image.height","45");
-        properties.setProperty("kaptcha.session.key","code");
-        Config config  = new Config(properties);
+        //验证码长度
+        properties.setProperty("kaptcha.textproducer.char.length", "4");
+        //有边框
+        properties.setProperty("kaptcha.border", "yes");
+        //边框色
+        properties.setProperty("kaptcha.border.color", "168,184,204");
+        //字体颜色
+        properties.setProperty("kaptcha.textproducer.font.color", "0,0,0");
+        //渐变色
+        properties.setProperty("kaptcha.background.clear.from", "168,184,204");
+        properties.setProperty("kaptcha.background.clear.to", "white");
+        //字体大小
+        properties.setProperty("kaptcha.textproducer.font.size", "30");
+        //字体
+        properties.setProperty("kaptcha.textproducer.font.names", "微软雅黑");
+        //验证码图片大小
+        properties.setProperty("kaptcha.image.width", "120");
+        properties.setProperty("kaptcha.image.height", "45");
+        //验证码保存的key
+        properties.setProperty("kaptcha.session.key", "code");
+        Config config = new Config(properties);
         defaultKaptcha.setConfig(config);
         return defaultKaptcha;
     }

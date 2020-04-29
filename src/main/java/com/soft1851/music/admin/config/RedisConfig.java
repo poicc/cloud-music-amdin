@@ -19,7 +19,11 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import java.time.Duration;
 
 /**
- * @author CRQ
+ * @ClassName RedisConfig
+ * @Description Redis配置类
+ * @Author crq
+ * @Date 2020/4/21
+ * @Version 1.0
  */
 @Configuration
 @EnableCaching
@@ -66,5 +70,4 @@ public class RedisConfig {
         stringRedisTemplate.setConnectionFactory(factory);
         return stringRedisTemplate;
     }
-
 }

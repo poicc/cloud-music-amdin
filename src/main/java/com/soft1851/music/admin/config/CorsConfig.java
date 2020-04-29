@@ -11,9 +11,11 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @author mq_xu
- * @description SwaggerConfig
- * @create 2020/1/7
+ * @ClassName CorsConfig
+ * @Description 跨域配置
+ * @Author crq
+ * @Date 2020/4/15
+ * @Version 1.0
  */
 @Configuration
 public class CorsConfig {
@@ -29,11 +31,11 @@ public class CorsConfig {
         List<String> allowedRequestMethods = Arrays.asList(requestMethods);
         config.setAllowedMethods(allowedRequestMethods);
         //允许的客户端请求头列表
-        String[] requestHeaders = {"x-requested-with", "Content-Type", "Access-Token"};
+        String[] requestHeaders = {"x-requested-with", "Content-Type", "Authorization","id"};
         List<String> allowedHeaders = Arrays.asList(requestHeaders);
         config.setAllowedHeaders(allowedHeaders);
         //允许的响应头列表
-        String[] responseHeaders = {"Access-Control-Expose-Headers", "Access-Token"};
+        String[] responseHeaders = {"Access-Control-Expose-Headers", "Authorization"};
         List<String> allowedExposedHeaders = Arrays.asList(responseHeaders);
         config.setExposedHeaders(allowedExposedHeaders);
         source.registerCorsConfiguration("/**", config);
