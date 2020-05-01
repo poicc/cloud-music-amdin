@@ -1,7 +1,10 @@
 package com.soft1851.music.admin.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.soft1851.music.admin.common.ResponseResult;
 import com.soft1851.music.admin.common.ResultCode;
 import com.soft1851.music.admin.domain.dto.LoginDto;
 import com.soft1851.music.admin.domain.entity.SysAdmin;
@@ -16,10 +19,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import java.util.*;
 
 /**
  * <p>
@@ -43,6 +47,15 @@ public class SysAdminServiceImpl extends ServiceImpl<SysAdminMapper, SysAdmin> i
     public Map<String,Object> login(LoginDto loginDto) {
         //根据查到基础信息，主要是要用密码来判定
         SysAdmin admin = sysAdminMapper.getSysAdminByName(loginDto.getName());
+//        String name = loginDto.getName();
+//        admin.setName(name);
+//        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+//        Validator validator =  factory.getValidator();
+//        Set<ConstraintViolation<SysAdmin>> validators = validator.validate(admin);
+//        for( ConstraintViolation<SysAdmin> constraintViolation:validators){
+//            log.error(constraintViolation.getMessage());
+//            System.out.println(constraintViolation.getMessage());
+//        }
         if (admin != null) {
             //客户端密码加密后和数据库的比对
             String pass = Md5Util.getMd5(loginDto.getPassword(), true, 32);
@@ -79,5 +92,60 @@ public class SysAdminServiceImpl extends ServiceImpl<SysAdminMapper, SysAdmin> i
     @Override
     public String getToken(String adminId, String roles, String secrect, Date expiresAt) {
         return JwtTokenUtil.getToken(adminId, roles, secrect, expiresAt);
+    }
+
+    @Override
+    public SysAdmin getAdminByName(String name) {
+        QueryWrapper<SysAdmin> wrapper = new QueryWrapper<>();
+        wrapper.eq("name", name);
+        SysAdmin sysAdmin = sysAdminMapper.selectOne(wrapper);
+        if (sysAdmin != null) {
+            return sysAdmin;
+        }
+        throw new CustomException("用户不存在", ResultCode.USER_NOT_FOUND);
+    }
+
+    @Override
+    public void updateInformation(SysAdmin admin) {
+        UpdateWrapper<SysAdmin> wrapper = new UpdateWrapper<>();
+        wrapper.set("name", admin.getName())
+                .set("avatar", admin.getAvatar())
+                .set("status", admin.getStatus())
+               // .set("password", Md5Util.getMd5(admin.getPassword(), true, 32))
+                .eq("id", admin.getId());
+        try {
+            sysAdminMapper.update(admin, wrapper);
+        } catch (Exception e) {
+            throw new CustomException("个人信息修改异常", ResultCode.DATABASE_ERROR);
+        }
+    }
+
+    @Override
+    public void updatePassword(SysAdmin admin) {
+        UpdateWrapper<SysAdmin> wrapper = new UpdateWrapper<>();
+        wrapper.set("name", admin.getName())
+                .eq("id", admin.getId())
+                .set("password", Md5Util.getMd5(admin.getPassword(), true, 32));
+        try {
+            sysAdminMapper.update(admin, wrapper);
+        } catch (Exception e) {
+            log.info("修改密码异常");
+        }
+    }
+
+
+    @Override
+    public void insertSingle(SysAdmin admin) {
+        try {
+            sysAdminMapper.insert(admin);
+        } catch (Exception e) {
+            throw new CustomException("用户新增异常", ResultCode.DATABASE_ERROR);
+        }
+
+    }
+
+    @Override
+    public Map<String, Object> selectAll() {
+        return null;
     }
 }

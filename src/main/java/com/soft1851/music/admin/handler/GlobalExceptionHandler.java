@@ -7,12 +7,17 @@ import com.soft1851.music.admin.exception.CustomException;
 import com.soft1851.music.admin.exception.JwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import javax.validation.ConstraintViolationException;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @ClassName GlobalExceptionHandler
@@ -88,5 +93,27 @@ public class GlobalExceptionHandler {
     public ResponseResult sendError(IOException exception) {
         log.error(exception.getMessage());
         return ResponseResult.failure(ResultCode.CAPTCHA_ERROR);
+    }
+
+
+    /**
+     * 数据错误的异常
+     * @param ex
+     * @return
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseResult handleValidationExceptions(MethodArgumentNotValidException ex){
+        Map<String,String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error)->{
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName,errorMessage);
+        });
+        return ResponseResult.failure(ResultCode.DATA_IS_WRONG,errors);
+    }
+
+    @ExceptionHandler(ConstraintViolationException.class)
+    ResponseResult handleConstraintViolationException(ConstraintViolationException e){
+        return ResponseResult.failure(ResultCode.DATA_IS_WRONG,e.getMessage());
     }
 }

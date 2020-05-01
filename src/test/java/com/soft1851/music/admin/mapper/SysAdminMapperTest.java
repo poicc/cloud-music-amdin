@@ -31,4 +31,11 @@ class SysAdminMapperTest {
     void getAdminByName() {
         System.out.println(sysAdminMapper.getSysAdminByName("mqxu"));
     }
+
+    @Test
+    void updateInformation() {
+        SysAdmin sysAdmin = sysAdminMapper.selectByName("oupai");
+        String name = sysAdmin.getName();
+       // SysAdmin sysAdmin = sysAdminMapper.updateInformation("oupai","https://avatars3.githubusercontent.com/u/59445871?s=460&u=da5694544e03959d2e2c54ea5b2a29c67174cbcc&v=4");
+    }
 }

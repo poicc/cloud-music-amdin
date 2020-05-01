@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="cloud_music@rm-m5ee476bu350735gjeo.mysql.rds.aliyuncs.com" uuid="af736d76-1daa-4ce9-bdf8-7e2ff1f83c01">
+    <data-source source="LOCAL" name="db_crq@rm-m5ee476bu350735gjeo.mysql.rds.aliyuncs.com" uuid="cb459cb3-6caf-4385-b61e-0587406bbbfa">
       <driver-ref>mysql</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
-      <jdbc-url>jdbc:mysql://rm-m5ee476bu350735gjeo.mysql.rds.aliyuncs.com:3306/cloud_music</jdbc-url>
+      <jdbc-url>jdbc:mysql://rm-m5ee476bu350735gjeo.mysql.rds.aliyuncs.com:3306/db_crq</jdbc-url>
     </data-source>
   </component>
 </project>

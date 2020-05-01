@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.soft1851.music.admin.annotation.UsernameAttribute;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
@@ -39,6 +40,7 @@ public class SysAdmin extends Model<SysAdmin> {
      * 用户名
      */
     @TableField("name")
+    //@UsernameAttribute
     private String name;
 
     /**

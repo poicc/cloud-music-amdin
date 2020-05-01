@@ -20,5 +20,13 @@
           AND t2.role_id = t3.role_id
           AND t1.name = #{name}
     </select>
+
+    <update id="updateAdmin"  parameterType="com.soft1851.music.admin.domain.entity.SysAdmin" >
+        UPDATE sys_admin
+        SET name=#{name},
+            password=#{password},
+            avatar=#{avatar}
+        WHERE id=#{id}
+    </update>
 </mapper>
 
